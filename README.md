@@ -293,3 +293,5 @@ Protected используется в тех случаях, когда нам �
 [https://metanit.com/ ](https://metanit.com/sharp/tutorial/1.2.php)
 
 https://learn.microsoft.com/ru-ru/dotnet/csharp/
+
+https://www.youtube.com/watch?v=52LFwIvlanQ
