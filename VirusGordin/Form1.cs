@@ -1,4 +1,4 @@
-namespace VirusGordin
+namespace AntivirusGordin
 {
     // Класс главной формы приложения (окна)
     public partial class Form1 : Form

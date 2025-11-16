@@ -1,4 +1,6 @@
-namespace VirusGordin
+using AntivirusGordin;
+
+namespace AntiAntivirusGordin
 {
     internal static class Program
     {

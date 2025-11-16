@@ -1,4 +1,4 @@
-﻿namespace VirusGordin
+﻿namespace AntivirusGordin
 {
     partial class Form1
     {
