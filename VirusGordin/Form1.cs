@@ -3,7 +3,10 @@ namespace VirusGordin
     // Класс главной формы приложения (окна)
     public partial class Form1 : Form
     {
-        // ВСЯ ТЕОРИЯ БУДЕТ НАПИСАНА В README ФАЙЛЕ, ВСЕ НЕОБХОДИМЫЕ ПОДСКАЗКИ И ПОЯСНЕНИЯ К КОДУ БУДУТ ТАМ
+        //https://t.me/motoridersss - мой телеграм (обязательно удалить данный комментарий)
+
+        // ВСЯ ТЕОРИЯ БУДЕТ НАПИСАНА В README ФАЙЛЕ, ВСЕ НЕОБХОДИМЫЕ ПОДСКАЗКИ И ПОЯСНЕНИЯ К КОДУ БУДУТ ТАМ (обязательно удалить данный комментарий)
+        // ПОСЛЕ ОЗНАКОМЛЕНИЯ С ПРОЕКТОМ КОММЕНТАРИИ МОЖЕТЕ УДАЛИТЬ, ЛИБО ОСТАВИТЬ КАК ПОДСКАЗКИ К КОДУ, ОШИБКОЙ ЭТО ЯВЛЯТЬСЯ НЕ БУДЕТ (обязательно удалить данный комментарий)
 
         // Конструктор формы - вызывается при создании формы
         public Form1()
@@ -208,12 +211,11 @@ namespace VirusGordin
                 // Удаление пути из вспомогательного списка
                 virusFile.Remove(path);
 
-                // Удаление объекта из списка инфицированных файлов по его пути
-                var itemToRemove = _infretctedFiles.FirstOrDefault(f => f.infectedFilePath == path);
-                _infretctedFiles.Remove(itemToRemove);
-
-                // Удаление строки из отображения в таблице
-                dataGridView1.Rows.Remove(selectedRow);
+                // Удаление объектов из списка инфицированных файлов по его пути
+                _infretctedFiles.RemoveAll(f => f.infectedFilePath == path);
+                // Обновление таблицы: метод Read() очищает DataGridView и заполняет его 
+                // данными из обновленного списка _infretctedFiles.
+                Read();
 
                 MessageBox.Show("Файл успешно удален.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Важное напоминание о перезагрузке (для резидентных угроз)
