@@ -3,12 +3,7 @@ namespace AntivirusGordin
     // Класс главной формы приложения (окна)
     public partial class Form1 : Form
     {
-        //https://t.me/motoridersss - мой телеграм (обязательно удалить данный комментарий)
-
-        // ВСЯ ТЕОРИЯ БУДЕТ НАПИСАНА В README ФАЙЛЕ, ВСЕ НЕОБХОДИМЫЕ ПОДСКАЗКИ И ПОЯСНЕНИЯ К КОДУ БУДУТ ТАМ (обязательно удалить данный комментарий)
-        // ПОСЛЕ ОЗНАКОМЛЕНИЯ С ПРОЕКТОМ КОММЕНТАРИИ МОЖЕТЕ УДАЛИТЬ, ЛИБО ОСТАВИТЬ КАК ПОДСКАЗКИ К КОДУ, ОШИБКОЙ ЭТО ЯВЛЯТЬСЯ НЕ БУДЕТ (обязательно удалить данный комментарий)
-
-        // Конструктор формы - вызывается при создании формы
+       
         public Form1()
         {
             InitializeComponent(); // Инициализация элементов, созданных в дизайнере (кнопки, таблицы и т.д.)
@@ -23,14 +18,14 @@ namespace AntivirusGordin
             DeleteAllVirusesBtn.Hide();
 
             Read(); // Обновление DataGridView (покажет пустую таблицу)
-            signatureWrite(); // Загрузка "базы данных" вирусных сигнатур
+            SignatureWrite(); // Загрузка "базы данных" вирусных сигнатур
         }
 
         #region Lists
         // Список для хранения вирусных сигнатур (база данных)
         List<Signature> _signature = new List<Signature>();
         // Список путей к файлам, в которых найден вирус (для удобства удаления)
-        List<string> virusFile = new List<string>();
+        List<string> _virusFile = new List<string>();
         // Список объектов, содержащих информацию об инфицированных файлах (путь + найденная сигнатура)
         List<InfectedFile> _infretctedFiles = new List<InfectedFile>();
         #endregion
@@ -55,40 +50,43 @@ namespace AntivirusGordin
         #region Methods
 
         // Метод для добавления одной сигнатуры в базу данных
-        void signatureWrite(string viruce, string signatureText, string DescriptionViruce) // Принимает данные сигнатуры
+        // В скобках указаны параметры, которые метод принимает в себя, для заполнения списка Signature черех объект signatureInstance
+        void SignatureWrite(string viruce, string signatureText, string descriptionViruce) 
         {
-            Signature signatureInstance; // Объявляет объект структуры
-            signatureInstance.ViruceName = viruce;
-            signatureInstance.SignatureName = signatureText;
-            signatureInstance.DescriptionViruce = DescriptionViruce; // Присваивает значения полям структуры
+            Signature signatureInstance; // Объявляение объекта структуры
+            signatureInstance.ViruceName = viruce;// Присваивает значения полю ViruceName
+            signatureInstance.SignatureName = signatureText;// Присваивает значения полю SignatureName
+            signatureInstance.DescriptionViruce = descriptionViruce; // Присваивает значения полю DescriptionViruce
             _signature.Add(signatureInstance); // Добавляет сигнатуру в список (базу данных)
         }
 
         // Метод для "загрузки" всей базы данных сигнатур (эмуляция)
-        void signatureWrite()
+        // Перегрузка метода. Внутри заполняются поля в список (базу данных), данные параметры передаются методу наверх
+        void SignatureWrite()
         {
-            signatureWrite("A1B2.478", "A1B2C3D4", "Опасный замещающий вирус.  По  окончании  своей работы вирус  имитирует ошибку позиционирования на текущем диске");
-            signatureWrite("Adolf.475", "Adolf Hitler", "Опасный   резидентный   вирус.  С  вероятностью  1/8 блокирует удаление файлов.");
-            signatureWrite("Aija", "Tks to B.B., Z-VirX ..... [Aija]. ", "Очень опасный Boot-вирус. 25 марта уничтожает содержимое первого сектора на  всех  цилиндрах  активного  раздела  DOS");
-            signatureWrite("Als.339", "XA-XA 1.01 A.L.S. ", "Очень  опасный  нерезидентный,  замещающий  программный  код, вирус");
-            signatureWrite("Amz.789", "AMZ", "24 сентября пытается  уничтожить  некоторые  сектора  всех  доступных дисков");
-            signatureWrite("Amz.1100", "AMZ", "1 марта и 13  сентября пытается  уничтожить  некоторые  сектора  всех  доступных дисков, также  иногда  уничтожает  содержимое  CMOS-памяти и создает файл BOPS - BOP.S.");
-            signatureWrite("Anarchy.2048", "ГрОб", "Заражает EXE- и COM-файлы (COM-файлы первая команда  которых  не JMP NEAR PTR(0E9h ? ?)), внедряя в начало файла 2048 байт своего  тела в  формате EXE-файла.");
+            //Заполнение параметров: viruce, signatureText, descriptionViruce
+            SignatureWrite("A1B2.478", "A1B2C3D4", "Опасный замещающий вирус.  По  окончании  своей работы вирус  имитирует ошибку позиционирования на текущем диске");
+            SignatureWrite("Adolf.475", "Adolf Hitler", "Опасный   резидентный   вирус.  С  вероятностью  1/8 блокирует удаление файлов.");
+            SignatureWrite("Aija", "Tks to B.B., Z-VirX ..... [Aija]. ", "Очень опасный Boot-вирус. 25 марта уничтожает содержимое первого сектора на  всех  цилиндрах  активного  раздела  DOS");
+            SignatureWrite("Als.339", "XA-XA 1.01 A.L.S. ", "Очень  опасный  нерезидентный,  замещающий  программный  код, вирус");
+            SignatureWrite("Amz.789", "AMZ", "24 сентября пытается  уничтожить  некоторые  сектора  всех  доступных дисков");
+            SignatureWrite("Amz.1100", "AMZ", "1 марта и 13  сентября пытается  уничтожить  некоторые  сектора  всех  доступных дисков, также  иногда  уничтожает  содержимое  CMOS-памяти и создает файл BOPS - BOP.S.");
+            SignatureWrite("Anarchy.2048", "ГрОб", "Заражает EXE- и COM-файлы (COM-файлы первая команда  которых  не JMP NEAR PTR(0E9h ? ?)), внедряя в начало файла 2048 байт своего  тела в  формате EXE-файла.");
         }
 
         // Метод для записи информации о найденном зараженном файле
         void InfectedFileWrite(string path, Signature viruce)
         {
             InfectedFile infectedFileInstance; // Объект для хранения данных о зараженном файле
-            infectedFileInstance.infectedFilePath = path;
-            infectedFileInstance.viruceFound = viruce;
-            _infretctedFiles.Add(infectedFileInstance); // Добавляет файл в список найденных угроз
+            infectedFileInstance.infectedFilePath = path; // Присваеваем полученный путь для файла (для отображения имени файла в таблице)
+            infectedFileInstance.viruceFound = viruce; // добавляем информацию о вирусе по структуре Signature (ViruceName, SignatureName, DescriptionViruce)
+            _infretctedFiles.Add(infectedFileInstance); // Добавляет файл в список найденных угроз (по этому списку мы заполняем таблицу DataGridView)
         }
 
         // Метод для обновления отображения списка зараженных файлов в таблице (DataGridView)
         void Read()
         {
-            dataGridView1.Rows.Clear(); // Очистка таблицы
+            dataGridView1.Rows.Clear(); // Очистка таблицы (для корректного заполнения таблицы, если мы не очистим, данные будут наслаиваться каждый раз)
 
             // Перебор всех найденных зараженных файлов
             foreach (var infect in _infretctedFiles)
@@ -106,26 +104,26 @@ namespace AntivirusGordin
         #endregion
 
         #region BtnsClick
-        // Обработчик нажатия кнопки "Выбрать папку"
+        // Событие клика на кнопку "Выбрать папку"
         void SelectFolderBtn_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.ShowDialog(); // Показ диалогового окна выбора папки
-            AdressFolderText.Text = $"Адрес папки: {folderBrowserDialog.SelectedPath}"; // Обновление текста с путем
+            AdressFolderText.Text = $"Адрес папки: {folderBrowserDialog.SelectedPath}"; // Обновление текста, который отображает путь до выбранной папки
             ScanFolderBtn.Show(); // Показ кнопки "Сканировать"
         }
 
-        // Обработчик нажатия кнопки "Сканировать папку"
+        // Событие клика на кнопку "Сканировать папку"
         void ScanFolderBtn_Click(object sender, EventArgs e)
         {
-            // Получение списка файлов *.txt в выбранной папке
+            // Получение массива файлов с расширением *.txt в выбранной папке
             string[] search = Directory.GetFiles(folderBrowserDialog.SelectedPath, "*.txt");
 
-            if (search.Length != 0) // Если файлы найдены
+            if (search.Length > 0) // Если файлы найдены
             {
-                // Обнуление списков перед началом нового сканирования
+                // Очищение списков перед началом нового сканирования (та же логика, что и с очищением таблицы DataGridView, чтобы данные не наслаивались)
                 _infretctedFiles.Clear();
-                virusFile.Clear();
-                progressBar1.Maximum = search.Length; // Установка максимума для прогресс-бара
+                _virusFile.Clear();
+                progressBar1.Maximum = search.Length; // Установка максимума для прогресс-бара (для демонстрации постепенного выполнения работы)
 
                 foreach (string item in search) // Перебор каждого найденного файла
                 {
@@ -142,17 +140,17 @@ namespace AntivirusGordin
                             nalVirusuces = true; // Вирус найден!
                             InfectedFileWrite(item, st); // Запись информации о найденной угрозе
                         }
-                        progressBar1.Increment(1); // Увеличение прогресса (неточно, должно быть вне внутреннего цикла)
+                        progressBar1.Increment(1); // Увеличение прогресса на 1 ед, после просмотра каждого файла (итак вплоть до того, пока весь массив search не переберётся)
                     }
 
-                    if (nalVirusuces) // Если в файле был найден хотя бы один вирус
+                    if (nalVirusuces) // Проверка наличия вируса (если есть, выполняем условие ниже)
                     {
-                        virusFile.Add(item); // Добавление пути в список файлов для удаления
+                        _virusFile.Add(item); // Добавление пути до файла в список файлов для удаления
                         // Показ кнопок удаления
                         DeleteSelectedVirusBtn.Show();
                         DeleteAllVirusesBtn.Show();
                     }
-                    stream.Close(); // Закрытие файла после чтения
+                    stream.Close(); // Закрытие (потока) файла после чтения (без закрытия мы не сможем удалять файлы)
                     Read(); // Обновление таблицы с результатами
                 }
 
@@ -164,17 +162,19 @@ namespace AntivirusGordin
             }
         }
 
-        // Обработчик нажатия кнопки "Удалить выбранный вирус"
+        // Событие клика на кнопку "Удалить выбранный вирус"
         void DeleteSelectedVirusBtn_Click(object sender, EventArgs e)
         {
-            // Проверка, выбрана ли строка в таблице
+            // Проверка, выбрана ли строка в таблице (если нет, выводим сообщение об ошибке)
             if (dataGridView1.CurrentRow == null || dataGridView1.CurrentRow.IsNewRow)
             {
                 MessageBox.Show("Пожалуйста, выберите файл для удаления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+                // return в данном случае говорит о том, что код, который после условия не нужно читать, и у нас всё оборвётся на этой строке (дальше выполнения не будет)
             }
-
+            // Объявляем объект выбранной строки (для идентификации выбранной строки пользователем)
             DataGridViewRow selectedRow = dataGridView1.CurrentRow;
+            // создаём 2 переменных: для пути до файла и названия вируса (имя вируса мы выбираем для отображения в сообщении диалогового окна)
             string path;
             string viruceName;
 
@@ -184,12 +184,14 @@ namespace AntivirusGordin
                 path = selectedRow.Cells[0]?.Value?.ToString();
                 viruceName = selectedRow.Cells[1]?.Value?.ToString();
 
+                // проверка на пустое значение (если переменная с путём пустая, то выводим ошибку)
                 if (string.IsNullOrEmpty(path))
                 {
                     MessageBox.Show("Не удалось получить путь к файлу из выбранной строки.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
+            //Ловим ошибку и выводим её в сообщении
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при чтении данных из таблицы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -200,57 +202,53 @@ namespace AntivirusGordin
             string message = $"Вы уверены, что хотите удалить файл:\n{path}\n\nНайденный вирус: {viruceName ?? "N/A"}";
             if (MessageBox.Show(message, "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                return; // Отмена удаления
+                return;
             }
 
-            try
-            {
+
                 // Удаление файла с диска
                 File.Delete(path);
 
-                // Удаление пути из вспомогательного списка
-                virusFile.Remove(path);
+            // Удаление пути из вспомогательного списка
+            _virusFile.Remove(path);
 
-                // Удаление объектов из списка инфицированных файлов по его пути
-                _infretctedFiles.RemoveAll(f => f.infectedFilePath == path);
-                // Обновление таблицы: метод Read() очищает DataGridView и заполняет его 
-                // данными из обновленного списка _infretctedFiles.
-                Read();
-
+            // Удаление объектов из списка инфицированных файлов по его пути
+            for (int i = _infretctedFiles.Count - 1; i >= 0; i--)
+            {
+                if (_infretctedFiles[i].infectedFilePath == path)
+                {
+                    _infretctedFiles.RemoveAt(i);
+                }
+            }
+            // Обновление таблицы: метод Read() очищает DataGridView и заполняет его 
+            // данными из обновленного списка _infectedFiles
+            Read();
+            // Уведомляем об успешном удалении
                 MessageBox.Show("Файл успешно удален.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Важное напоминание о перезагрузке (для резидентных угроз)
                 MessageBox.Show("Для удаления резидентных копий из оперативной памяти перезагрузите, пожалуйста, компьютер");
-            }
-            catch (IOException ioEx)
-            {
-                // Обработка ошибок, если файл занят
-                MessageBox.Show($"Не удалось удалить файл. Он может быть занят другим процессом.\nОшибка: {ioEx.Message}", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                // Обработка прочих ошибок
-                MessageBox.Show($"Произошла непредвиденная ошибка: {ex.Message}", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+         
         }
 
-        // Обработчик нажатия кнопки "Удалить все вирусы"
+        // Событие клика на кнопку "Удалить все вирусы"
         void DeleteAllVirusesBtn_Click(object sender, EventArgs e)
         {
             // Проверка, есть ли что удалять
-            if (virusFile.Count == 0)
+            if (_virusFile.Count == 0)
             {
                 MessageBox.Show("Список для удаления пуст.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            foreach (string fn in virusFile) // Перебор всех найденных зараженных файлов
+            foreach (string fn in _virusFile) // Перебор всех найденных зараженных файлов
             {
                 // Удаление файла с диска
                 File.Delete(fn);
             }
 
             // Очистка всех списков и обновление интерфейса
-            virusFile.Clear();
+            _virusFile.Clear();
             _infretctedFiles.Clear();
             Read();
 
