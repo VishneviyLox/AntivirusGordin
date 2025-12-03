@@ -1,4 +1,4 @@
-<img width="880" height="466" alt="image" src="https://github.com/user-attachments/assets/8313dd0f-8a54-4f30-bc9f-978243e5eacc" /># Содержание
+# Содержание
 
 - [ПЕРЕД ИСПОЛЬЗОВАНИЕМ](#перед-использованием)
 - [КАК УСТАНОВИТЬ VISUAL STUDIO](#как-установить-visual-studio)
