@@ -43,6 +43,26 @@
 
 <img width="1220" height="620" alt="image" src="https://github.com/user-attachments/assets/66d96eec-b07f-44a4-86a4-de23ff365a19" />
 
+P.S. у некоторых ребят могут возникнуть проблемы с открытием проекта (Проект написан на .NET 8)
+
+<img width="1280" height="712" alt="image" src="https://github.com/user-attachments/assets/e4edda5f-850c-4f8b-ac10-471829cdc2a1" />
+
+вам необходимо установить .NET 8. Как это сделать ?
+
+Переходите в Visual studio Installer, выбираете свою версию Visual studio, нажимаете изменить.
+
+<img width="946" height="429" alt="image" src="https://github.com/user-attachments/assets/42883245-140f-466e-abe5-7ec025b0230f" />
+
+После, сверху кликаете на "отдельные компоненты" 
+
+<img width="1050" height="532" alt="image" src="https://github.com/user-attachments/assets/61a6d331-a1b0-4985-8933-13dc3464006b" />
+
+Затем в строке поиска вбиваете .NET 8 и находим следующую строку и ставим галочку
+
+<img width="630" height="311" alt="image" src="https://github.com/user-attachments/assets/f7b5f409-8588-4b32-8529-35915b08cd99" />
+
+После нажимаем изменить в правом нижнем углу, ждём загрузку и пробуем заново запустить проект. Проблема должна будет исчезнуть
+
 
 
 [К содержанию](#Содержание)
